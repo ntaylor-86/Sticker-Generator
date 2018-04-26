@@ -1,5 +1,5 @@
 # Sticker-Label-Creater
-A Python script that genereates a PDF file that can be used to print labels with the AVERY Removable Multi-Purpose Labels (L7157REV). This script uses pylabels - https://github.com/bcbnz/pylabels and reportlab - https://pypi.org/project/reportlab/ . Thanks to these two projects!
+A Python script that genereates a PDF file that can be used to print labels with the AVERY Removable Multi-Purpose Labels (L7157REV). This script uses pylabels - https://github.com/bcbnz/pylabels and reportlab - https://pypi.org/project/reportlab/ . Thanks to those two projects!
 
 ## Getting Started
 
