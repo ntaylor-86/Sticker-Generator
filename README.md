@@ -38,5 +38,5 @@ Once you have exported a job into a .txt format you can now run the script
 
 ```
 Change into the directory where the script is located,
-$ ./label-maker.py
+$ ./sticker-generator.py
 ```
