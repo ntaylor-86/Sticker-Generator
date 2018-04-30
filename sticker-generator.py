@@ -13,38 +13,24 @@
 import labels
 from reportlab.graphics import shapes
 from collections import namedtuple
-import  os.path
+import os.path
 import sys
 import re
 
 print
 print " N4tH4N's                          "
-print "          __  .__        __                 "
-print "  _______/  |_|__| ____ |  | __ ___________ "
-print " /  ___/\   __\  |/ ___\|  |/ // __ \_  __ \\"
-print " \___ \  |  | |  \  \___|    <\  ___/|  | \/"
-print "/____  > |__| |__|\___  >__|_ \\\\___  >__|   "
-print "     \/               \/     \/    \/      __                       "
-print "   ____   ____   ____   ________________ _/  |_  ___________ "
-print "  / ___\_/ __ \ /    \_/ __ \_  __ \__  \\\\   __\/  _ \_  __ \\"
-print " / /_/  >  ___/|   |  \  ___/|  | \// __ \|  | (  <_> )  | \/"
-print " \___  / \___  >___|  /\___  >__|  (____  /__|  \____/|__|   "
-print "/_____/      \/     \/     \/           \/                   "
+print ".__        ___.          .__       "
+print "|  | _____ \_ |__   ____ |  |      "
+print "|  | \__  \ | __ \_/ __ \|  |      "
+print "|  |__/ __ \| \_\ \  ___/|  |__    "
+print "|____(____  /___  /\___  >____/    "
+print "          \/    \/ __ \/          "
+print "     _____ _____  |  | __ ___________ "
+print "    /     \\\\__  \ |  |/ // __ \_  __ \\"
+print "   |  Y Y  \/ __ \|    <\  ___/|  | \/"
+print "   |__|_|  (____  /__|_ \\\\___  >__|   "
+print "         \/     \/     \/    \/       "
 print
-print " |-------------------------------|"
-print " |   1) Print Labels             |"
-print " |   2) Test Mode                |"
-print " |-------------------------------|"
-print
-mode = raw_input("# Please enter an option number: ")
-
-print_labels = False
-test_mode = False
-
-if mode == "1":
-    print_labels = True
-elif mode == "2":
-    test_mode = True
 
 
 ###########################################################################
@@ -71,6 +57,26 @@ else:
 
 print
 print
+
+#########################################################################
+#######   Defining whether to print labels or run "test mode"    ########
+#########################################################################
+
+print
+print " +-------------------------------+"
+print " |   (1) Generate Labels         |"
+print " |   (2) Test Mode               |"
+print " +-------------------------------+"
+
+mode = raw_input("# Please enter an option number: ")
+
+print_labels = False
+test_mode = False
+
+if mode == "1":
+    print_labels = True
+elif mode == "2":
+    test_mode = True
 
 ##################################################################
 #######   Finding all the lines that have * - number *    ########
