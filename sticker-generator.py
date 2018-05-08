@@ -67,6 +67,7 @@ print " +-------------------------------+"
 print " |   (1) Generate Labels         |"
 print " |   (2) Test Mode               |"
 print " +-------------------------------+"
+print
 
 mode = raw_input("# Please enter an option number: ")
 
@@ -117,7 +118,7 @@ print "The number of parts in the job =", array_length
 
 if customer == "G H VARLEY - TOMAGO (McINTYRE ROAD - DEFENCE)":
     customer = "VARLEY_TOMAGO_DEFENCE"
-elif customer == "G H VARLEY - TOMAGO (SCHOOL DRIVE)":
+elif customer == "G H VARLEY - TOMAGO (SCHOOL DRIVE)" or customer == "G H VARLEY - BNE":
     customer = "VARLEY"
 
 
@@ -217,6 +218,7 @@ for j, item in enumerate(lines_ahead_array):
         order_no = lines_ahead_array[j+1].split("\t")[2]
 
 print "Order Number =", order_no
+print
 
 
 #################################################################
@@ -291,6 +293,7 @@ if print_labels == True:
 
                 label.add(group)
 
+
         # setting up the label for VARLEY
         if customer == "VARLEY":
             Part = namedtuple(
@@ -318,6 +321,8 @@ if print_labels == True:
                     group.add(shape)
 
                 label.add(group)
+
+
 
         sheet = labels.Sheet(specs, draw_part, border=False)
 
