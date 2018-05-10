@@ -16,6 +16,7 @@ from collections import namedtuple
 import os.path
 import sys
 import re
+import shutil
 
 print
 print " N4tH4N's                          "
@@ -375,6 +376,9 @@ if print_labels == True:
 
         pdf_name = job_number + '.pdf'
         sheet.save(pdf_name)
+        
+        # Moving the txt file to the Already-Processed folder
+        shutil.move(input_file, './Already-Processed/')
 
 
 #################################
