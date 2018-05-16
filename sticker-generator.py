@@ -121,6 +121,8 @@ if customer == "G H VARLEY - TOMAGO (McINTYRE ROAD - DEFENCE)":
     customer = "VARLEY_TOMAGO_DEFENCE"
 elif customer == "G H VARLEY - TOMAGO (SCHOOL DRIVE)" or customer == "G H VARLEY - BNE":
     customer = "VARLEY"
+elif customer == "TRITIUM PTY LTD":
+    customer = "TRITIUM"
 
 
 ##################################################################
@@ -155,8 +157,11 @@ for i in ticket_line_number_array:
                 # adding "CUSTOMER LABELS" if the next line contains "CUSTOMER"
                 if lines_ahead_array[j+1].split(" ")[0] == "CUSTOMER":
                     client_part_number_array.append("CUSTOMER-LABELS")
+                # ADDING "DESPATCH" if the next line contains "DESPATCH"
+                elif lines_ahead_array[j+1].split("\t")[0] == "DESPATCH":
+                    client_part_number_array.append("DESPATCH")
+                # one line down from "Part Description" and splitting the string with the first white space
                 else:
-                    # one line down from "Part Description" and splitting the string with the first white space
                     client_part_number_array.append(lines_ahead_array[j+1].split(" ")[0])
 
 
@@ -323,6 +328,34 @@ if print_labels == True:
 
                 label.add(group)
 
+        # setting up the label for TRITIUM
+        if customer == "TRITIUM":
+            Part = namedtuple(
+                'Part',
+                ['gci_group', 'customer', 'order_number', 'part_number', 'rev_qty']
+            )
+
+            def draw_part(label, width, height, part):
+                lines = [
+                    part.rev_qty,
+                    part.part_number,
+                    part.order_number,
+                    part.customer,
+                    part.gci_group
+                ]
+
+                group = shapes.Group()
+                x, y = 0, 0
+
+                for line in lines:
+                    if not line:
+                        continue
+                    shape = shapes.String(x, y, line, textAnchor="start", fontName="Helvetica", fontSize=6)
+                    y += 11
+                    group.add(shape)
+
+                label.add(group)
+
 
 
         sheet = labels.Sheet(specs, draw_part, border=False)
@@ -369,6 +402,25 @@ if print_labels == True:
                 sheet.add_label(part)
                 print "* generating label number: " + str(label_counter) + " *"
                 label_counter += 1
+
+        # creating the labels for TRITIUM
+        if customer == "TRITIUM":
+            for i, item in enumerate(ticket_line_number_array):
+                # it will not generate a label if the client part is "CUSTOMER-LABELS" or "DESPATCH"
+                if client_part_number_array[i] == "CUSTOMER-LABELS" or client_part_number_array[i] == "DESPATCH":
+                    print client_part_number_array[i]
+                else:
+                    part = Part(
+                        "GCI GROUP" + (" "*55) + str(job_number) + "-" + str(i + 1),
+                        "CUSTOMER:  TRITIUM",
+                        "ORDER NUMBER:  " + str(order_no),
+                        "PART NUMBER:  " + str(client_part_number_array[i]),
+                        "REV:  " + str(revision_array[i]) + (" "*25) + "QTY:  " + str(qty_array[i])
+                    )
+
+                    sheet.add_label(part)
+                    print "* generating label number: " + str(label_counter) + " *"
+                    label_counter += 1
 
         print
         print "Saving the pdf as " + str(job_number) + ".pdf"
