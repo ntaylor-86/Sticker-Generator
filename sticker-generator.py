@@ -117,7 +117,7 @@ print "The number of parts in the job =", array_length
 ############  Defining the customer variable  #############
 ###########################################################
 
-if customer == "G H VARLEY - TOMAGO (McINTYRE ROAD - DEFENCE)":
+if customer == "G H VARLEY - TOMAGO DEFENCE":
     customer = "VARLEY_TOMAGO_DEFENCE"
 elif customer == "G H VARLEY - TOMAGO (SCHOOL DRIVE)" or customer == "G H VARLEY - BNE" or customer == "G H VARLEY (SYDNEY)":
     customer = "VARLEY"
