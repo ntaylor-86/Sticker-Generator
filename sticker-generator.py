@@ -179,7 +179,7 @@ for i in ticket_line_number_array:
 
     for j, item in enumerate(lines_ahead_array):
         if item.find("Order Qty") >= 0:
-            qty_array.append(lines_ahead_array[j+1].split("\t")[4])
+            qty_array.append(lines_ahead_array[j+1].split("\t")[0])
 
 ########################################################
 ############  Creating the Revision Array  #############
