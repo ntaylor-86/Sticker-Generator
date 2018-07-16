@@ -123,6 +123,8 @@ elif customer == "G H VARLEY - TOMAGO (SCHOOL DRIVE)" or customer == "G H VARLEY
     customer = "VARLEY"
 elif customer == "TRITIUM PTY LTD":
     customer = "TRITIUM"
+elif customer == "BELL ENVIRONMENTAL":
+    customer = "BELL"
 
 
 ##################################################################
@@ -137,7 +139,7 @@ for i in ticket_line_number_array:
         if counter < ( i + 12 ) and counter > ( i + 2 ):
             lines_ahead_array.append(line)
 
-    if customer == "VARLEY":
+    if customer == "VARLEY" or customer == "BELL":
         for j, item in enumerate(lines_ahead_array):
             if j < 3 and item.find("Issue Date") >= 0:
                 # going back by one line and splitting the string by {TAB}
@@ -328,8 +330,8 @@ if print_labels == True:
 
                 label.add(group)
 
-        # setting up the label for TRITIUM
-        if customer == "TRITIUM":
+        # setting up the label for TRITIUM and BELL ENVIRONMENTAL
+        if customer == "TRITIUM" or "BELL":
             Part = namedtuple(
                 'Part',
                 ['gci_group', 'customer', 'order_number', 'part_number', 'rev_qty']
@@ -422,6 +424,22 @@ if print_labels == True:
                     print "* generating label number: " + str(label_counter) + " *"
                     label_counter += 1
 
+        # creating the labels for BELL ENVIRONMENTAL
+        if customer == "BELL":
+            for i, item in enumerate(ticket_line_number_array):
+                if client_part_number_array[i] != "CUSTOMER-LABELS":
+                    part = Part(
+                        "GCI GROUP" + (" "*55) + str(job_number) + "-" + str(i + 1),
+                        "CUSTOMER:  BELL ENVIRONMENTAL",
+                        "ORDER NUMBER:  " + str(order_no),
+                        "PART NUMBER:  " + str(client_part_number_array[i]),
+                        "REV:  " + str(revision_array[i]) + (" "*25) + "QTY:  " + str(qty_array[i])
+                    )
+
+                    sheet.add_label(part)
+                    print "* generating label number: " + str(label_counter) + " *"
+                    label_counter += 1
+
         print
         print "Saving the pdf as " + str(job_number) + ".pdf"
         print
@@ -445,12 +463,13 @@ if test_mode == True:
     print
 
     for i, item in enumerate(ticket_line_number_array):
-        print "Ticket Number:", job_number+"-"+str(i+1)
-        print "Part Number: ", client_part_number_array[i]
-        if customer == "VARLEY_TOMAGO_DEFENCE" or customer == "VARLEY":
-            print "Revision:", revision_array[i]
-        print "Quantity:", qty_array[i]
-        print
+        if client_part_number_array[i] != "CUSTOMER-LABELS":
+            print "Ticket Number:", job_number+"-"+str(i+1)
+            print "Part Number: ", client_part_number_array[i]
+            if customer == "VARLEY_TOMAGO_DEFENCE" or customer == "VARLEY":
+                print "Revision:", revision_array[i]
+            print "Quantity:", qty_array[i]
+            print
 
 # print this to stdout only if the user chose to print labels
 if print_labels == True:
