@@ -23,13 +23,15 @@ print "Single Label Maker..."
 print
 print " +------------------------------------------------------+"
 print " |   (1) G H VARLEY - TOMAGO (McINTYRE ROAD - DEFENCE)  |"
-print " |   (2) Test Mode                                      |"
+print " |   (2) G H VARLEY - TOMAGO (SCHOOL DRIVE)             |"
 print " +------------------------------------------------------+"
 print
 customer = raw_input("##  Please select who the customer is: ")
 
 if customer == "1":
     customer = "VARLEY_TOMAGO_DEFENCE"
+elif customer == "2":
+    customer = "VARLEY_TOMAGO"
 
 if customer == "VARLEY_TOMAGO_DEFENCE":
     # Getting the Kit Number from the USER, this changes with each order
@@ -99,6 +101,76 @@ if customer == "VARLEY_TOMAGO_DEFENCE":
             sheet.add_label(part)
             print "Generating label " + str(counter) + " of " + str(qty)
             counter += 1
+
+        print
+        make_sticker_prompt = raw_input("Would you like to make another label (y or n): ")
+        make_sticker_prompt = make_sticker_prompt.lower()
+        valid_answer = False
+        while valid_answer == False:
+            if make_sticker_prompt == 'y':
+                make_sticker = True
+                valid_answer = True
+            elif make_sticker_prompt == 'n':
+                make_sticker = False
+                valid_answer = True
+            else:
+                print "That is not a valid answer!"
+                print
+                make_sticker_prompt = raw_input("Would you like to make another label (y or n): ")
+                make_sticker_prompt = make_sticker_prompt.lower()
+
+    pdf_name = job_number + '.pdf'
+    sheet.save(pdf_name)
+
+# setting up labels for VARLEY_TOMAGO
+if customer == "VARLEY_TOMAGO":
+    Part = namedtuple(
+        'Part',
+        ['gci_group', 'customer', 'order_number', 'part_number', 'rev_qty'])
+
+
+    def draw_part(label, width, height, part):
+        lines = [
+            part.rev_qty,
+            part.part_number,
+            part.order_number,
+            part.customer,
+            part.gci_group
+        ]
+
+        group = shapes.Group()
+        x, y = 0, 0
+
+
+        for line in lines:
+            if not line:
+                continue
+            shape = shapes.String(x, y, line, textAnchor="start", fontName="Helvetica", fontSize=6)
+            y += 11
+            group.add(shape)
+
+        label.add(group)
+
+
+    sheet = labels.Sheet(specs, draw_part, border=False)
+
+    make_sticker = True
+    while make_sticker == True:
+        job_number = raw_input("What is the job number: ")
+        order_no = raw_input("What is the order number: ")
+        ticket_number = raw_input("What is the ticket number: ")
+        part_number = raw_input("What is the client part number: ")
+        qty = raw_input("What is the qty: ")
+        revision = raw_input("What is the revision: ")
+
+        part = Part("GCI GROUP" + (" " * 55) + str(job_number) + "-" + str(ticket_number),
+                    "CUSTOMER:  VARLEY",
+                    "ORDER NUMBER:  " + str(order_no),
+                    "PART NUMBER:  " + str(part_number),
+                    "REV:  " + str(revision) + (" " * 25) + "QTY:  " + str(qty)
+                    )
+        sheet.add_label(part)
+        print "Generating label "
 
         print
         make_sticker_prompt = raw_input("Would you like to make another label (y or n): ")
