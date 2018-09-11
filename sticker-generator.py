@@ -378,7 +378,7 @@ if print_labels == True:
 
                     part = Part("GCI GROUP" + (" "*55) + str(job_number) + "-" + str(i + 1),
                                 "CUSTOMER:  VARLEY - TOMAGO",
-                                "DIVISION:  DEFENCE & AERO" + (" " * 10) + "KIT NUMBER:  " + kit_number,
+                                "DIVISION:  DEFENCE & AERO" + (" " * 8) + "KIT NO.  " + kit_number,
                                 "PART NUMBER:  " + str(client_part_number_array[i]),
                                 "REV:  " + str(revision_array[i]) + (" "*25) + "QTY:  " + str(counter) + "  of  " + str(qty_array[i])
                                 )
