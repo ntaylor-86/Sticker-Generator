@@ -269,9 +269,9 @@ if customer == "VARLEY_TOMAGO_DEFENCE":
 if print_labels == True:
         # Create an A4 portrait (210mm x 297mm) sheet with 3 columns and 11 rows of labels.
         # Each label is 63.6mm x 24.1mm with a 2mm rounded corner. The margins are automatically calculated.
-        # left_margin is 7mm, top_margin is 12mm, column_gap is 2.7mm
+        # left_margin is 7mm, top_margin is 14mm, column_gap is 2.7mm
         specs = labels.Specification(210, 297, 3, 11, 63.6, 24.1, corner_radius=2,
-                                     left_padding=3, bottom_padding=1.5, left_margin=6.5, top_margin=12,
+                                     left_padding=3, bottom_padding=1.5, left_margin=6.5, top_margin=14,
                                      row_gap=0.5, column_gap=2.7)
 
         # setting up labels for VARLEY_TOMAGO_DEFENCE
