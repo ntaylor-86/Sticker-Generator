@@ -24,6 +24,7 @@ print
 print " +------------------------------------------------------+"
 print " |   (1) G H VARLEY - TOMAGO (McINTYRE ROAD - DEFENCE)  |"
 print " |   (2) G H VARLEY - TOMAGO (SCHOOL DRIVE)             |"
+print " |   (3) G H VARLEY - BNE                               |"
 print " +------------------------------------------------------+"
 print
 customer = raw_input("##  Please select who the customer is: ")
@@ -32,6 +33,8 @@ if customer == "1":
     customer = "VARLEY_TOMAGO_DEFENCE"
 elif customer == "2":
     customer = "VARLEY_TOMAGO"
+elif customer == "3":
+    customer = "VARLEY_BNE"
 
 if customer == "VARLEY_TOMAGO_DEFENCE":
     # Getting the Kit Number from the USER, this changes with each order
