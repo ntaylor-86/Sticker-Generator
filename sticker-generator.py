@@ -369,26 +369,27 @@ if print_labels == True:
         if customer == "VARLEY_TOMAGO_DEFENCE":
             for i, item in enumerate(ticket_line_number_array):
                 counter = 1
-                while counter <= int(qty_array[i]):
-                    # print "Ticket Number: " + str(job_number) + "-" + str(i + 1)
-                    # print "Part Number: " + str(client_part_number_array[i])
-                    # print "Revision: " + str(revision_array[i])
-                    # print "Quantity: " + str(counter) + " of " + str(qty_array[i])
-                    # print
+                if client_part_number_array[i] != "CUSTOMER-LABELS":
+                    while counter <= int(qty_array[i]):
+                        # print "Ticket Number: " + str(job_number) + "-" + str(i + 1)
+                        # print "Part Number: " + str(client_part_number_array[i])
+                        # print "Revision: " + str(revision_array[i])
+                        # print "Quantity: " + str(counter) + " of " + str(qty_array[i])
+                        # print
 
-                    part = Part("GCI GROUP" + (" "*55) + str(job_number) + "-" + str(i + 1),
-                                "CUSTOMER:  VARLEY - TOMAGO",
-                                "DIVISION:  DEFENCE & AERO" + (" " * 8) + "KIT NO.  " + kit_number,
-                                "PART NUMBER:  " + str(client_part_number_array[i]),
-                                "REV:  " + str(revision_array[i]) + (" "*25) + "QTY:  " + str(counter) + "  of  " + str(qty_array[i])
-                                )
+                        part = Part("GCI GROUP" + (" "*55) + str(job_number) + "-" + str(i + 1),
+                                    "CUSTOMER:  VARLEY - TOMAGO",
+                                    "DIVISION:  DEFENCE & AERO" + (" " * 8) + "KIT NO.  " + kit_number,
+                                    "PART NUMBER:  " + str(client_part_number_array[i]),
+                                    "REV:  " + str(revision_array[i]) + (" "*25) + "QTY:  " + str(counter) + "  of  " + str(qty_array[i])
+                                    )
 
-                    print "* generating label number: " + str(label_counter) + " *"
+                        print "* generating label number: " + str(label_counter) + " *"
 
-                    sheet.add_label(part)
-                    counter += 1
+                        sheet.add_label(part)
+                        counter += 1
 
-                    label_counter +=1
+                        label_counter +=1
 
         # creating the labels for VARLEY
         if customer == "VARLEY":
